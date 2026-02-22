@@ -44,3 +44,20 @@ function promiseAll(promiseArr) {
     });
   });
 }
+
+function promiseRace(promises) {
+  const result = [];
+
+  return new Promise((resolve, reject) => {
+    promises.forEach((promise) => {
+      promise
+        .then((res) => {
+          result.push(res);
+          resolve(result);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  });
+}
